@@ -17,3 +17,15 @@ export type User = {
 
 export type RUser = Omit<User, "id" | "passwordHash" |"createdAt" |"updatedAt" >
 
+
+
+export type Order = {
+  id: number;
+  customerId: number;
+  quantity: number;
+  food: string;
+  price: number;
+  createdAt: Date;
+  updatedAt: Date;
+};
+

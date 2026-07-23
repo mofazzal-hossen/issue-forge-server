@@ -8,7 +8,7 @@ app.use(logger)
 
 initDB()
 app.get('/', (req:Request, res:Response) => {
-  throw Error ("Server Is Dying")
+  // throw Error ("Server Is Dying")
   res.send('Hello World!')
 })
 
