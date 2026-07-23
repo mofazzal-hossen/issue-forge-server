@@ -9,6 +9,6 @@ export const globalErrorHandler = (err:unknown,req:Request, res:Response, next:N
         success:false,
         message:err instanceof Error? err.message: "Internal Server Error" ,
 
-        stack: config.node_env === "development" && err instanceof Error? err.message: undefined
+        stack: config.node_env === "development" && err instanceof Error? err.stack: undefined
     })
 }
