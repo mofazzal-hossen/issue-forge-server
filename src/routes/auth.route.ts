@@ -1,8 +1,9 @@
 import { Router } from "express";
+import { signup } from "../controller/auth.controller";
 
 const router  = Router()
 
-router.post('sinup',()=>{})
+router.post('signup',signup)
 
 router.post('/sinin',()=>{})
 
