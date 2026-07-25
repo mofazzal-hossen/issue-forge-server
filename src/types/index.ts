@@ -29,3 +29,7 @@ export type Order = {
   updatedAt: Date;
 };
 
+// export type CreateOrder = Omit<
+//   Order,
+//   "id" | "createdAt" | "updatedAt"
+// >;
