@@ -1,6 +1,8 @@
-import { sql } from "../db";
-import type { RUser } from "../types";
+
+
 import bcrypt from "bcrypt"
+import { sql } from "../../db";
+import type { RUser } from "../../types";
 
 class AuthService {
     async createUser(user: RUser & { password: string }) {
