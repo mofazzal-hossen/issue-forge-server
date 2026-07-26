@@ -1,13 +1,15 @@
-import type { Request, Response } from "express";
-import authService from "../service/auth.Service";
-import { sendResponse } from '../../utils/sendResponse';
+import type { NextFunction, Request, Response } from 'express'
+import authService from '../service/auth.Service'
+import { sendResponse } from '../../utils/sendResponse'
 
 
-export const signup = (req: Request, res: Response) => {
-    const user = authService.createUser(req.body)
-    if (!user) {
-        sendResponse(res, { message: 'Failed to create user' }, 400)
-    }
+export const signup = async (req: Request, res: Response) => {
+  const { name, email, password, age, role } = req.body;
+  const user = await authService.createUser({ name, email, password, age, role });
 
-    sendResponse(res, { message: 'user cerate successfully', data: user }, 201)
-}
+  if (!user) {
+    return sendResponse(res, { message: "Failed to create user", error: true }, 400);
+  }
+
+  sendResponse(res, { message: "User registered successfully", data: user }, 200);
+};

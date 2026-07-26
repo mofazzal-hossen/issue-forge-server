@@ -7,6 +7,7 @@ import authRoute from './api/routes/auth.route'
 
 const app = express()
 app.use(logger)
+app.use(express.json())
 
 initDB()
 app.get('/', (req:Request, res:Response) => {
@@ -14,6 +15,6 @@ app.get('/', (req:Request, res:Response) => {
   res.send('Hello World!')
 })
 
-app.use(authRoute)
+app.use("/auth",authRoute)
 app.use(globalErrorHandler)
 export default app
