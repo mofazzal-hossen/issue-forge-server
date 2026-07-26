@@ -6,12 +6,12 @@ const router = Router()
 
 router.post('signup', signup)
 
-// router.post('/sinin', () => { })
+router.post('/sinin', () => { })
 
-// router.get('/me', () => { })
+router.get('/me', () => { })
 
-// router.put('/update/:id', () => { })
+router.put('/update/:id', () => { })
 
-// router.delete('/delete/:id', () => { })
+router.delete('/delete/:id', () => { })
 
 export default router
