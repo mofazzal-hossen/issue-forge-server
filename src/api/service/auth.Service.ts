@@ -23,10 +23,18 @@ class AuthService {
     `;
 
         return res[0];
-    }
-}
+    };
+
+
+
+};
 
 export default new AuthService()
 
 
-//   RETURNING *;
+//validateUser 4->step 
+//  Search for a user
+//Whether a user exists
+//Password verification
+// Return without password
+
