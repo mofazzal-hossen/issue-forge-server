@@ -31,14 +31,16 @@ class AuthService {
             SELECT * FROM users WHERE email = ${email}
 
         `
-        if(res.length){
+        if(!res.length){
             return null;
         };
 
         const {passwordHash, ...user}= res[0] as User
         const isValid =await bcrypt.compare(password,passwordHash)
-        return
+        return isValid ? user : null
     }
+
+
 
 };
 

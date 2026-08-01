@@ -20,24 +20,12 @@ export const signup = async (req: Request, res: Response) => {
 //login
 export const login = async (req: Request, res: Response) => {
   const { name, email, password, age, role } = req.body;
-  const user = await authService.createUser({ name, email, password, age, role });
+  const user = await authService.validateUser(email, password);
 
   if (!user) {
-    return sendResponse(res, { message: "Failed to create user", error: true }, 400);
+    return sendResponse(res, { message: "invalid email and user", }, 401);
   }
 
-  sendResponse(res, { message: "User registered successfully", data: user }, 200);
+  //user validate token 
 };
 
-// token
-
-export const token = async (req: Request, res: Response) => {
-  const { name, email, password, age, role } = req.body;
-  const user = await authService.createUser({ name, email, password, age, role });
-
-  if (!user) {
-    return sendResponse(res, { message: "Failed to create user", error: true }, 400);
-  }
-
-  sendResponse(res, { message: "User registered successfully", data: user }, 200);
-};
