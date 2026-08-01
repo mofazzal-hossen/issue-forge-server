@@ -12,7 +12,7 @@ class AuthService {
         const passwordHash = await bcrypt.hash(password, 10);
 
         const res = await sql`
-      INSERT INTO users (name, email, passwordHash, age, role)
+      INSERT INTO users (name, email, password_hash, age, role)
       VALUES (
         ${name},
         ${email},
@@ -35,8 +35,8 @@ class AuthService {
             return null;
         };
 
-        const {passwordHash, ...user}= res[0] as User
-        const isValid =await bcrypt.compare(password,passwordHash)
+        const {password_hash, ...user}= res[0] as User
+        const isValid =await bcrypt.compare(password,password_hash)
         return isValid ? user : null
     }
 

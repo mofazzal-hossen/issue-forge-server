@@ -1,6 +1,8 @@
 import type { NextFunction, Request, Response } from 'express'
 import authService from '../service/auth.Service'
 import { sendResponse } from '../../utils/sendResponse'
+import { signToken } from '../../utils/jwt';
+
 
 
 export const signup = async (req: Request, res: Response) => {
@@ -19,13 +21,20 @@ export const signup = async (req: Request, res: Response) => {
 
 //login
 export const login = async (req: Request, res: Response) => {
-  const { name, email, password, age, role } = req.body;
+  const {  email, password,  } = req.body;
   const user = await authService.validateUser(email, password);
 
   if (!user) {
-    return sendResponse(res, { message: "invalid email and user", }, 401);
+     sendResponse(res, { message: "invalid email and user", }, 401);
+     return
   }
 
-  //user validate token 
+  const {accessToken,refreshToken}=signToken(user)
+  const result ={
+    user:user,
+    accessToken,
+    refreshToken
+  }
+  return sendResponse(res,{message:"user login successfully",  data:result},)
 };
 

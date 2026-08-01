@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(250) UNIQUE NOT NULL,
  
-   passwordHash TEXT NOT NULL,
+   password_hash TEXT NOT NULL,
 
     age INT NOT NULL,
     role VARCHAR(20) DEFAULT 'user',

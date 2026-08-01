@@ -8,25 +8,25 @@ export type User = {
     id: number,
     name: string,
     email:string,
-    passwordHash: string,
+    password_hash: string,
     age: number,
     role: role,
     createdAt: Date,
-    updatedAt:Date
+     created_at:Date
 }
 
-export type RUser = Omit<User, "id" | "passwordHash" |"createdAt" |"updatedAt" >
+export type RUser = Omit<User, "id" | "password_hash" |" created_at" |" created_at" >
 
 
 
 export type Order = {
   id: number;
-  customerId: number;
+  customer_id: number;
   quantity: number;
   food: string;
   price: number;
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  updated_at: Date;
 };
 
 // export type CreateOrder = Omit<
