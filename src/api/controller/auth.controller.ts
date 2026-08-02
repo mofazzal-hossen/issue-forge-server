@@ -46,5 +46,12 @@ export const login = async (req: Request, res: Response) => {
   return sendResponse(res, { message: "user login successfully", data: result },)
 };
 
+export const refresh = (req: Request, res: Response) => {
 
+  const refreshToken = req.signedCookies?.refreshToken
+  if (!refreshToken) {
+    return sendResponse(res, { message: 'refresh token not fund ' })
+  }
+
+}
 //tack the refresh token , validate, user , access
