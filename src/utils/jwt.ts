@@ -5,9 +5,10 @@ import jwt from 'jsonwebtoken'
 
 
 
-const verifyToken = (token:string, type:"access"|"refresh")=>{
-    const secret = type ==='access' ? config.access_secret :config.refresh_secret 
+  export const verifyToken = (token:string, type:"access"|"refresh")=>{
+    const secret = type =='access' ? config.access_secret :config.refresh_secret 
     const decode =jwt.verify(token, secret)
+    return decode
 }
 
 export const signToken= (payload: RUser & {id:number})=>{

@@ -1,7 +1,8 @@
 import type { NextFunction, Request, Response } from 'express'
 import authService from '../service/auth.Service'
 import { sendResponse } from '../../utils/sendResponse'
-import { signToken } from '../../utils/jwt';
+import { signToken, verifyToken } from '../../utils/jwt';
+
 
 
 
@@ -31,7 +32,7 @@ export const login = async (req: Request, res: Response) => {
 
   const { accessToken, refreshToken } = signToken(user)
 
-  res.cookie('refreshCookie', refreshToken, {
+  res.cookie('refreshToken', refreshToken, {
     sameSite: "lax",
     httpOnly: true,
     secure: false
@@ -46,12 +47,23 @@ export const login = async (req: Request, res: Response) => {
   return sendResponse(res, { message: "user login successfully", data: result },)
 };
 
-export const refresh = (req: Request, res: Response) => {
 
-  const refreshToken = req.signedCookies?.refreshToken
+
+
+///error 
+
+export const refresh = (req: Request, res: Response) => {
+// error signedCookies
+  const refreshToken = req.cookies?.refreshToken
   if (!refreshToken) {
     return sendResponse(res, { message: 'refresh token not fund ' })
   }
+  const payload = verifyToken(refreshToken, "refresh")
+  console.log(payload)
 
 }
 //tack the refresh token , validate, user , access
+
+
+
+
