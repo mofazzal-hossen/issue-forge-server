@@ -21,28 +21,30 @@ export const signup = async (req: Request, res: Response) => {
 
 //login
 export const login = async (req: Request, res: Response) => {
-  const {  email, password,  } = req.body;
+  const { email, password, } = req.body;
   const user = await authService.validateUser(email, password);
 
   if (!user) {
-     sendResponse(res, { message: "invalid email and user", }, 401);
-     return
+    sendResponse(res, { message: "invalid email and user", }, 401);
+    return
   }
 
-  const {accessToken,refreshToken}=signToken(user)
- 
-     res.cookie('refreshCookie', refreshToken, {
-        sameSite:"lax",
-       httpOnly:true,
-       secure:false
-      
-     })
+  const { accessToken, refreshToken } = signToken(user)
 
-  const result ={
-    user:user,
+  res.cookie('refreshCookie', refreshToken, {
+    sameSite: "lax",
+    httpOnly: true,
+    secure: false
+
+  })
+
+  const result = {
+    user: user,
     accessToken,
     refreshToken
   }
-  return sendResponse(res,{message:"user login successfully",  data:result},)
+  return sendResponse(res, { message: "user login successfully", data: result },)
 };
 
+
+//tack the refresh token , validate, user , access
