@@ -30,6 +30,14 @@ export const login = async (req: Request, res: Response) => {
   }
 
   const {accessToken,refreshToken}=signToken(user)
+ 
+     res.cookie('refreshCookie', refreshToken, {
+        sameSite:"lax",
+       httpOnly:true,
+       secure:false
+      
+     })
+
   const result ={
     user:user,
     accessToken,
