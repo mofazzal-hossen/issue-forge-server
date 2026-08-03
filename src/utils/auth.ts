@@ -7,14 +7,14 @@ import type { role } from "../types";
 
 
 
-const auth = async (req: Request, res: Response, next: NextFunction) => {
+export const auth = async (req: Request, res: Response, next: NextFunction) => {
     const Token = req.headers.authorization
 
     if (!Token) {
         return sendResponse(res, { message: 'token not fund ' }, 401)
     };
 
-    const payload = verifyToken(Token, "refresh")
+    const payload = verifyToken(Token, "access")
     if (!payload) {
         return sendResponse(res, { message: 'invalid refresh token  ' }, 401)
     }
