@@ -55,11 +55,13 @@ export const login = async (req: Request, res: Response) => {
 export const refresh = async(req: Request, res: Response) => {
 
   const refreshToken = req.cookies?.refreshToken
+  
   if (!refreshToken) {
     return sendResponse(res, { message: 'refresh token not fund ' },401)
-  }
+  };
+
   const payload = verifyToken(refreshToken, "refresh")
-    if (!refreshToken) {
+    if (!payload) {
     return sendResponse(res, { message: 'invalid refresh token  ' },401)
   }
   // console.log(payload)
