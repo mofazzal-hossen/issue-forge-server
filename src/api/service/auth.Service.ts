@@ -47,7 +47,7 @@ class AuthService {
     WHERE id = ${id}
   `;
 
-  return res[0] as RUser & {id: string};
+   return res[0] as RUser & { id: number };
 }
 
 

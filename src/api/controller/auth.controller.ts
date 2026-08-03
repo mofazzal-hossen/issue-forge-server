@@ -50,10 +50,10 @@ export const login = async (req: Request, res: Response) => {
 
 
 
-///error 
+
 
 export const refresh = async(req: Request, res: Response) => {
-// error signedCookies
+
   const refreshToken = req.cookies?.refreshToken
   if (!refreshToken) {
     return sendResponse(res, { message: 'refresh token not fund ' },401)
@@ -62,11 +62,28 @@ export const refresh = async(req: Request, res: Response) => {
     if (!refreshToken) {
     return sendResponse(res, { message: 'invalid refresh token  ' },401)
   }
-  console.log(payload)
+  // console.log(payload)
 
   const user = await authService.getUserById(payload.id) 
-  console.log(user)
+  // console.log(user)
 
+  if (!user) {
+    return sendResponse(res,{ message: 'user not found',},404)
+    
+  }
+  const { accessToken, refreshToken: newRefreshToken } = signToken(user);
+  res.cookie("refreshToken",newRefreshToken,{
+    secure:false,
+    sameSite:'lax',
+    httpOnly:true
+  } )
+
+  sendResponse(res,{
+    message:"refresh token",data:{
+      accessToken,
+      newRefreshToken
+    }
+  })
 }
 //tack the refresh token , validate, user , access
 

@@ -6,7 +6,7 @@ import jwt, { type JwtPayload } from 'jsonwebtoken'
 
 
   export const verifyToken = (token:string, type:"access"|"refresh")=>{
-    const secret = type =='access' ? config.access_secret :config.refresh_secret 
+    const secret = type ==='access' ? config.access_secret :config.refresh_secret 
     const decode =jwt.verify(token, secret)
     return decode as JwtPayload
 }
